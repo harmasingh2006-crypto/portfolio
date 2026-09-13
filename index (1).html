@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Harman Singh — Biotechnology &amp; Computational Biology</title>
+<meta name="description" content="Portfolio of Harman Singh, a biotechnology undergraduate working across computational biology, data science and web development." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F9F8;
+    --bg-alt:#EEF2F0;
+    --ink:#16211D;
+    --ink-soft:#55645C;
+    --accent:#2F7A66;
+    --accent-warm:#C9862E;
+    --line:#D8E0DC;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{margin:0;}
+  p{margin:0;}
+  a{color:inherit;}
+  ul,ol{margin:0; padding:0;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 1.5rem;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--accent); color:#fff;
+    padding:0.6rem 1rem; z-index:100; text-decoration:none; border-radius:2px;
+  }
+  .skip-link:focus{left:1rem; top:1rem;}
+
+  a:focus-visible, .skip-link:focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px;
+  }
+
+  /* Header */
+  .site-header{
+    position:sticky; top:0;
+    background:rgba(247,249,248,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    z-index:10;
+  }
+  .header-inner{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1.1rem 0;
+  }
+  .brand{font-weight:600; text-decoration:none; font-size:1rem; color:var(--ink);}
+  .nav{display:flex; gap:1.5rem; overflow-x:auto; scrollbar-width:none;}
+  .nav::-webkit-scrollbar{display:none;}
+  .nav a{color:var(--ink-soft); text-decoration:none; font-size:0.9rem; white-space:nowrap;}
+  .nav a:hover{color:var(--accent);}
+
+  /* Hero */
+  .hero{position:relative; overflow:hidden; padding:5.5rem 0 4.5rem;}
+  .hero-motif{position:absolute; right:2%; top:0; height:100%; width:220px; z-index:0; pointer-events:none;}
+  .hero-inner{position:relative; z-index:1; max-width:620px;}
+  .hero h1{
+    font-size:clamp(2.3rem, 6vw, 4rem);
+    font-weight:600;
+    letter-spacing:-0.02em;
+    line-height:1.05;
+  }
+  .hero .role{
+    margin-top:0.9rem;
+    font-size:clamp(1.05rem, 2.2vw, 1.3rem);
+    font-weight:500;
+    color:var(--accent);
+  }
+  .hero .about-blurb{
+    margin-top:1.5rem;
+    font-size:1.05rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    max-width:56ch;
+  }
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:1.4rem;
+    margin-top:2.2rem;
+  }
+  .contact-row a{
+    font-size:0.92rem;
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+  }
+  .contact-row a:hover{color:var(--accent); border-color:var(--accent);}
+
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);} }
+  .hero h1{animation:fadeUp 0.6s ease both;}
+  .hero .role{animation:fadeUp 0.6s ease both; animation-delay:0.1s;}
+  .hero .about-blurb{animation:fadeUp 0.6s ease both; animation-delay:0.2s;}
+  .hero .contact-row{animation:fadeUp 0.6s ease both; animation-delay:0.3s;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  /* Sections */
+  .section{padding:4.5rem 0;}
+  .section.alt{background:var(--bg-alt);}
+  .section h2{
+    position:relative;
+    padding-top:1.2rem;
+    margin-bottom:2.3rem;
+    font-size:clamp(1.4rem, 3vw, 1.8rem);
+    font-weight:600;
+  }
+  .section h2::before{
+    content:""; position:absolute; top:0; left:0;
+    width:32px; height:3px; background:var(--accent);
+  }
+
+  /* Skills */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:2.2rem 3rem;
+  }
+  .skill-block h3{font-size:1rem; font-weight:600; margin-bottom:0.5rem;}
+  .skill-block p{color:var(--ink-soft); font-size:0.95rem; line-height:1.6;}
+
+  /* Timeline */
+  .timeline{
+    list-style:none;
+    border-left:2px solid var(--line);
+    margin-left:6px;
+  }
+  .timeline li{position:relative; padding-left:2rem; padding-bottom:2.4rem;}
+  .timeline li:last-child{padding-bottom:0;}
+  .timeline li::before{
+    content:""; position:absolute; left:-7px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent);
+  }
+  .section.alt .timeline li::before{background:var(--bg-alt);}
+  .tl-date{font-size:0.85rem; color:var(--ink-soft); margin-bottom:0.35rem;}
+  .tl-body h3{font-size:1.05rem; font-weight:600; margin-bottom:0.35rem;}
+  .tl-body h3 a{text-decoration:none; border-bottom:1px solid var(--line);}
+  .tl-body h3 a:hover{color:var(--accent); border-color:var(--accent);}
+  .tl-body p{color:var(--ink-soft); font-size:0.95rem; line-height:1.6;}
+
+  /* Plain lists (certifications, education) */
+  .plain-list{list-style:none;}
+  .plain-list li{
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:1rem; padding:1rem 0; border-bottom:1px solid var(--line);
+  }
+  .plain-list li:last-child{border-bottom:none;}
+  .plain-list li span:first-child{font-weight:500;}
+  .plain-list li .meta{color:var(--ink-soft); font-size:0.9rem; white-space:nowrap;}
+
+  /* Contact section */
+  .contact-section p{color:var(--ink-soft); max-width:52ch; margin-bottom:1.6rem; line-height:1.6;}
+
+  .site-footer{padding:2.2rem 0; border-top:1px solid var(--line);}
+  .site-footer p{color:var(--ink-soft); font-size:0.85rem;}
+
+  @media (max-width:860px){
+    .hero-motif{display:none;}
+  }
+  @media (max-width:640px){
+    .skills-grid{grid-template-columns:1fr;}
+    .section{padding:3rem 0;}
+    .plain-list li{flex-direction:column; align-items:flex-start; gap:0.3rem;}
+    .nav{gap:1.1rem;}
+  }
+</style>
+</head>
+<body>
+<a href="#about" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#about" class="brand">Harman Singh</a>
+    <nav class="nav" aria-label="Section navigation">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="about">
+  <svg class="hero-motif" viewBox="0 0 240 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <g opacity="0.18" stroke="#2F7A66" stroke-width="3" fill="none" stroke-linecap="round">
+      <path d="M60,0 C60,50 180,50 180,100 C180,150 60,150 60,200 C60,250 180,250 180,300 C180,350 60,350 60,400"/>
+      <path d="M180,0 C180,50 60,50 60,100 C60,150 180,150 180,200 C180,250 60,250 60,300 C60,350 180,350 180,400"/>
+      <line x1="60" y1="0" x2="180" y2="0"/>
+      <line x1="180" y1="100" x2="60" y2="100"/>
+      <line x1="60" y1="200" x2="180" y2="200"/>
+      <line x1="180" y1="300" x2="60" y2="300"/>
+      <line x1="60" y1="400" x2="180" y2="400"/>
+    </g>
+  </svg>
+  <div class="wrap hero-inner">
+    <h1>Harman Singh</h1>
+    <p class="role">Biotechnology undergraduate working across computational biology and data science.</p>
+    <p class="about-blurb">I'm studying biotechnology at Lovely Professional University, splitting my time between the wet lab and the terminal — running PCR one day, docking small molecules against protein targets the next. I like picking up new tools quickly, learning by building things end to end, and making lab concepts easier to follow than they were the first time I saw them. Based in Punjab, India.</p>
+    <div class="contact-row">
+      <a href="mailto:harmasingh2006@gmail.com">harmasingh2006@gmail.com</a>
+      <a href="tel:+919478930844">+91 94789 30844</a>
+      <a href="https://in.linkedin.com/harma2006singh" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/harmasingh2006-crypto" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h3>Structural biology &amp; docking</h3>
+        <p>Molecular docking, virtual screening, protein structure prediction, AutoDock Vina, PyMOL, Discovery Studio, ESMFold, plus the PDB, PubChem and SwissTargetPrediction APIs.</p>
+      </div>
+      <div class="skill-block">
+        <h3>Wet lab &amp; microbiology</h3>
+        <p>Nanoparticle synthesis via alkaline co-precipitation, PCR, gel electrophoresis, DNA extraction, rDNA cloning, microbial culture and staining, streak-plate isolation, spore counting, immunoassays, spectrophotometry, GLP.</p>
+      </div>
+      <div class="skill-block">
+        <h3>Programming &amp; data</h3>
+        <p>Python, C, C++, Jupyter notebooks, data handling, and the basics of cloud and cybersecurity.</p>
+      </div>
+      <div class="skill-block">
+        <h3>Web &amp; product</h3>
+        <p>HTML, CSS, JavaScript, React, Node.js, and shipping sites with WordPress, Wix, Figma, Vercel, Hostinger and Replit.</p>
+      </div>
+      <div class="skill-block">
+        <h3>CAD &amp; modelling</h3>
+        <p>PTC Creo Parametric, including AI-assisted modelling workflows.</p>
+      </div>
+      <div class="skill-block">
+        <h3>Marketing</h3>
+        <p>Social media management, Meta Ads, and marketing strategy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="projects">
+  <div class="wrap">
+    <h2>Things I've built</h2>
+    <ol class="timeline">
+      <li>
+        <div class="tl-date">March 2026</div>
+        <div class="tl-body">
+          <h3><a href="https://apex-dev.org" target="_blank" rel="noopener">Apex-Dev</a></h3>
+          <p>Personal project. Frontend development and SEO/Meta Ads optimisation for an educational platform.</p>
+        </div>
+      </li>
+      <li>
+        <div class="tl-date">December 2025</div>
+        <div class="tl-body">
+          <h3>Microbiology quiz game</h3>
+          <p>An interactive digital game built to make core lab concepts easier to revise.</p>
+        </div>
+      </li>
+      <li>
+        <div class="tl-date">December 2025</div>
+        <div class="tl-body">
+          <h3>Touch-free smart dustbin</h3>
+          <p>An Arduino-based waste disposal system using ultrasonic sensors for proximity detection and a servo motor for automatic lid control.</p>
+        </div>
+      </li>
+      <li>
+        <div class="tl-date">August 2025</div>
+        <div class="tl-body">
+          <h3>3D jet engine model</h3>
+          <p>A functional, rotating mechanical model designed in Creo Parametric.</p>
+        </div>
+      </li>
+      <li>
+        <div class="tl-date">March 2025</div>
+        <div class="tl-body">
+          <h3>Income tax calculator</h3>
+          <p>An object-oriented C++ application with file handling for automated tax-slab computation.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="certifications">
+  <div class="wrap">
+    <h2>Certifications</h2>
+    <ul class="plain-list">
+      <li><span>Data Science &amp; Machine Learning</span><span class="meta">Code with Harry (6 months)</span></li>
+      <li><span>Complete Python Bootcamp</span><span class="meta">CodeStars / Udemy (4 weeks)</span></li>
+      <li><span>Communication &amp; Public Speaking for a Successful Career</span><span class="meta">3 months</span></li>
+      <li><span>Basics of Python Language</span><span class="meta">Scalar (2 weeks)</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section alt" id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <ul class="plain-list">
+      <li><span>B.Tech in Biotechnology, Lovely Professional University</span><span class="meta">Aug 2024–Present</span></li>
+      <li><span>Class 12, St. Mary's School, Jindwari</span><span class="meta">2023–2024</span></li>
+      <li><span>Class 10, St. Mary's School, Jindwari</span><span class="meta">2021–2022</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section contact-section" id="contact">
+  <div class="wrap">
+    <h2>Let's talk</h2>
+    <p>I'm always up for talking about protein structures, side projects, or just good ideas. Reach out directly:</p>
+    <div class="contact-row">
+      <a href="mailto:harmasingh2006@gmail.com">harmasingh2006@gmail.com</a>
+      <a href="tel:+919478930844">+91 94789 30844</a>
+      <a href="https://in.linkedin.com/harma2006singh" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/harmasingh2006-crypto" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Based in Punjab, India.</p>
+  </div>
+</footer>
+
+</body>
+</html>
